@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an S3 bucket with configurable name and versioning
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Name for the S3 bucket
+  VersioningState:
+    Type: String
+    AllowedValues: [Enabled, Suspended]
+    Default: Suspended
+    Description: Enable or suspend versioning
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      VersioningConfiguration:
+        Status: !Ref VersioningState
